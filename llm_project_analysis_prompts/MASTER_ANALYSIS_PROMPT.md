@@ -30,6 +30,7 @@ I need you to perform a comprehensive analysis of my multi-repository applicatio
 - **Script Path Documentation**: Complete relative paths from repository root for ALL scripts
 - **Multi-Script Workflow Mapping**: Execution order, dependencies, contexts
 - **Integration Points**: APIs, databases, external services, message queues
+- **Flexible Repository Detection**: Automatically identify project structure (monorepo, multi-repo, embedded CI/CD)
 
 #### 2. **Workflow Mapping & Visualization** (Priority: HIGH)
 - **End-to-End Process Flows**: Development → Testing → Deployment
@@ -37,6 +38,8 @@ I need you to perform a comprehensive analysis of my multi-repository applicatio
 - **Script Integration Documentation**: When, where, and how scripts execute
 - **Mermaid Diagrams**: System architecture, sequence flows, state transitions
 - **Environment Management**: Development, staging, production workflows
+- **Individual Script Flow Diagrams**: Create detailed flow diagrams for each significant script
+- **Embedded CI/CD Detection**: Identify Jenkins files, GitHub Actions, or other CI/CD configurations within source repositories
 
 #### 3. **DevOps & CI/CD Analysis** (Priority: HIGH)
 - **Pipeline Discovery**: Jenkins, GitHub Actions, GitLab CI, custom scripts
@@ -44,6 +47,7 @@ I need you to perform a comprehensive analysis of my multi-repository applicatio
 - **Deployment Workflows**: Build → Test → Deploy → Monitor
 - **Environment Configuration**: Variables, secrets, configuration management
 - **Script Execution Contexts**: Build scripts, deployment scripts, maintenance scripts
+- **Dynamic CI/CD Location Handling**: Analyze CI/CD configurations regardless of their location (dedicated repos, source repos, or mixed)
 
 #### 4. **Code Quality & Security Assessment** (Priority: MEDIUM)
 - **Redundancy Detection**: Duplicate code, configurations, scripts across repositories
@@ -76,12 +80,19 @@ I need you to perform a comprehensive analysis of my multi-repository applicatio
 │   ├── complete_script_list.md
 │   ├── execution_contexts.md
 │   ├── dependency_mapping.md
-│   └── multi_script_workflows.md
+│   ├── multi_script_workflows.md
+│   ├── individual_script_flows.md
+│   └── dynamic_structure_analysis.md
 ├── 📈 04_diagrams/
 │   ├── system_architecture.mermaid
 │   ├── workflow_sequences.mermaid
 │   ├── service_interactions.mermaid
-│   └── deployment_flow.mermaid
+│   ├── deployment_flow.mermaid
+│   └── script_flows/
+│       ├── [script_name]_flow.mermaid
+│       ├── build_process_flow.mermaid
+│       ├── deployment_flow.mermaid
+│       └── maintenance_scripts_flow.mermaid
 ├── 🔍 05_analysis_reports/
 │   ├── code_quality_assessment.md
 │   ├── security_analysis.md
@@ -92,11 +103,16 @@ I need you to perform a comprehensive analysis of my multi-repository applicatio
 │   ├── optimization_opportunities.md
 │   ├── automation_suggestions.md
 │   └── best_practices_implementation.md
-└── 📋 07_onboarding/
-    ├── developer_guide.md
-    ├── setup_instructions.md
-    ├── troubleshooting.md
-    └── team_workflows.md
+├── 📋 07_onboarding/
+│   ├── developer_guide.md
+│   ├── setup_instructions.md
+│   ├── troubleshooting.md
+│   └── team_workflows.md
+└── 🔧 08_cicd_analysis/
+    ├── pipeline_discovery.md
+    ├── deployment_strategies.md
+    ├── environment_management.md
+    └── security_compliance.md
 ```
 
 ### 🎯 CRITICAL REQUIREMENTS
@@ -107,10 +123,18 @@ I need you to perform a comprehensive analysis of my multi-repository applicatio
 - **Include execution context**: When, how, and why each script runs
 - **Document dependencies**: What each script requires to function
 - **Multi-script workflows**: Show execution order and data flow
+- **Individual Script Flows**: Create detailed flow diagrams for each significant script
+
+#### **Dynamic Project Structure Handling:**
+- **Flexible Detection**: Automatically identify whether CI/CD files are in dedicated repositories or embedded within source code
+- **Monorepo Support**: Handle projects where multiple applications exist in a single repository
+- **Mixed Structures**: Adapt to projects with both dedicated and embedded CI/CD configurations
+- **No Assumptions**: Don't assume standard project structures; analyze what actually exists
 
 #### **Mermaid Diagram Validation:**
 - **Node Naming**: Use alphanumeric characters, avoid spaces and special characters
 - **Script References**: Include script paths in node labels: `"./path/to/script.sh<br/>Description"`
+- **Individual Script Flows**: Create separate flow diagrams for each significant script
 - **Syntax Validation**: Ensure all diagrams render correctly
 - **Connection Clarity**: Clear arrows and relationship indicators
 
@@ -122,22 +146,40 @@ I need you to perform a comprehensive analysis of my multi-repository applicatio
 
 ### 🔧 ANALYSIS METHODOLOGY
 
-1. **Repository Discovery**: Scan all directories for project indicators
-2. **Technology Stack Identification**: Analyze package files, configurations, code
-3. **Script Inventory**: Find and catalog all executable scripts with full paths
-4. **Workflow Tracing**: Follow code execution paths and deployment processes
-5. **Integration Mapping**: Identify how components communicate and depend on each other
-6. **Documentation Generation**: Create comprehensive, navigable documentation
-7. **Validation**: Ensure all diagrams render and paths are accurate
+#### Phase 1: Discovery & Mapping
+1. **Project Structure Detection**: Automatically identify project organization (monorepo, multi-repo, mixed)
+2. **Repository Discovery**: Scan all directories for project indicators
+3. **CI/CD Configuration Discovery**: Locate CI/CD files regardless of their location (dedicated repos vs embedded)
+4. **Technology Stack Identification**: Analyze package files, configurations, code
+5. **Script Inventory**: Find and catalog all executable scripts with full paths
+6. **Integration Mapping**: Identify how components communicate and depend on each other
+
+#### Phase 2: Deep Analysis
+1. **Individual Script Analysis**: Create detailed flow diagrams for each significant script
+2. **Workflow Tracing**: Follow code execution paths and deployment processes
+3. **Architecture Documentation**: Create comprehensive system architecture diagrams
+4. **Dynamic Structure Adaptation**: Adjust analysis approach based on actual project structure
+5. **Documentation Generation**: Create comprehensive, navigable documentation
+
+#### Phase 3: Enhancement & Recommendations
+1. **Gap Analysis**: Identify missing components or processes
+2. **Optimization Opportunities**: Suggest improvements for efficiency and maintainability
+3. **Structure-Specific Recommendations**: Provide suggestions tailored to the actual project organization
+4. **Validation**: Ensure all diagrams render and paths are accurate
 
 ### ✅ SUCCESS CRITERIA
 
-- **Complete Documentation**: All repositories analyzed and documented
-- **Accurate Script Paths**: All script references use correct relative paths
-- **Valid Diagrams**: All Mermaid diagrams render without errors
-- **Clear Workflows**: Step-by-step processes are easy to follow
-- **Actionable Insights**: Specific recommendations with implementation guidance
-- **Team-Ready**: Documentation suitable for onboarding and daily use
+Your analysis is successful when:
+- ✅ **Complete Documentation**: All required files are generated in `./documentation/`
+- ✅ **Accurate Script Paths**: All script references use complete relative paths
+- ✅ **Valid Mermaid Diagrams**: All diagrams render without syntax errors
+- ✅ **Individual Script Flows**: Each significant script has its own detailed flow diagram
+- ✅ **Dynamic Structure Handling**: Analysis adapts to actual project organization (monorepo, multi-repo, embedded CI/CD)
+- ✅ **Comprehensive Coverage**: Every significant script and workflow is documented
+- ✅ **Flexible CI/CD Analysis**: CI/CD configurations are analyzed regardless of their location
+- ✅ **Actionable Insights**: Clear, implementable recommendations are provided
+- ✅ **Cross-Repository Mapping**: Dependencies and workflows across repositories are clear
+- ✅ **Executive Summary**: High-level overview suitable for stakeholders
 
 ### 🚀 EXECUTION INSTRUCTIONS
 
