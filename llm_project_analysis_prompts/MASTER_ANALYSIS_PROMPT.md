@@ -131,6 +131,13 @@ I need you to perform a comprehensive analysis of my multi-repository applicatio
 - **Mixed Structures**: Adapt to projects with both dedicated and embedded CI/CD configurations
 - **No Assumptions**: Don't assume standard project structures; analyze what actually exists
 
+#### **Checkpoint & Recovery Requirements:**
+- **Mandatory Checkpoints**: Create checkpoint files after each major phase
+- **Context Preservation**: Save critical discovery data for recovery scenarios
+- **Phase Independence**: Ensure each phase can run independently with proper context
+- **Recovery Instructions**: Include clear resume commands in checkpoint files
+- **Progress Tracking**: Document completion status of each analysis component
+
 #### **Mermaid Diagram Validation:**
 - **Node Naming**: Use alphanumeric characters, avoid spaces and special characters
 - **Script References**: Include script paths in node labels: `"./path/to/script.sh<br/>Description"`
@@ -180,19 +187,84 @@ Your analysis is successful when:
 - ✅ **Actionable Insights**: Clear, implementable recommendations are provided
 - ✅ **Cross-Repository Mapping**: Dependencies and workflows across repositories are clear
 - ✅ **Executive Summary**: High-level overview suitable for stakeholders
+- ✅ **Checkpoint & Recovery**: Checkpoint files created after each major phase with recovery instructions
+
+## 🔄 Resilience & Recovery Features
+
+### 📊 **Checkpoint System**
+To handle long-running analyses and potential interruptions:
+
+#### **Phase-Based Execution**
+- **Phase 1 Checkpoint**: After repository discovery and structure detection
+- **Phase 2 Checkpoint**: After script inventory and dependency mapping
+- **Phase 3 Checkpoint**: After workflow analysis and diagram generation
+- **Phase 4 Checkpoint**: After enhancement recommendations
+
+#### **Recovery Mechanism**
+If analysis is interrupted:
+1. **Save Progress**: Each phase creates a `checkpoint_[phase].md` file
+2. **Resume Instructions**: Include clear "Resume from Phase X" instructions
+3. **Context Preservation**: Save discovered structure and script inventory
+4. **Incremental Updates**: Allow partial re-analysis of specific components
+
+#### **Context & Network Resilience**
+**For Long-Running Sessions:**
+- **Context Limits**: Break analysis into digestible chunks (max 2000 lines per phase)
+- **Memory Management**: Save key findings to checkpoint files for reference
+- **Network Interruptions**: Each phase is self-contained and resumable
+- **Token Optimization**: Prioritize critical analysis components first
+
+**Recovery Commands:**
+```
+# If interrupted during Phase 1
+"Resume repository discovery from checkpoint_1.md"
+
+# If interrupted during Phase 2  
+"Continue script inventory using previous structure data"
+
+# If interrupted during Phase 3
+"Generate remaining diagrams from checkpoint_3.md"
+
+# If context is lost
+"Reload analysis context from ./documentation/ folder"
+```
+
+#### **Modular Execution Options**
+```
+# Quick Start (Full Analysis)
+Copy entire prompt → Run complete analysis
+
+# Modular Approach (For Large Projects)
+Phase 1: Repository Discovery & Structure Detection
+Phase 2: Script Inventory & Dependency Mapping  
+Phase 3: Workflow Analysis & Diagram Generation
+Phase 4: Enhancement Recommendations
+
+# Recovery Mode
+"Resume analysis from Phase [X] using checkpoint data"
+```
 
 ### 🚀 EXECUTION INSTRUCTIONS
 
-**Please begin the analysis now by:**
+**OPTION 1 - FULL ANALYSIS**: Start comprehensive analysis of the current workspace. Generate all documentation in `./documentation/` folder following the exact structure specified above.
 
-1. **Scanning my workspace** for all repositories and project structures
-2. **Identifying the technology stack** across all repositories
-3. **Creating the documentation folder structure** as specified above
-4. **Generating comprehensive analysis** following all requirements
-5. **Validating all outputs** for accuracy and completeness
+**OPTION 2 - PHASED ANALYSIS**: Execute in phases with checkpoints:
+- Start with "Phase 1: Repository Discovery"
+- Create checkpoint after each phase
+- Resume with "Continue from Phase [X]" if interrupted
 
-**Start with a high-level overview, then dive deep into each component. Ensure all script paths are documented with complete relative paths from repository root, and all Mermaid diagrams follow proper syntax validation.**
+**OPTION 3 - RECOVERY MODE**: If resuming interrupted analysis:
+- Load previous checkpoint data
+- Continue from specified phase
+- Update existing documentation incrementally
+
+**IMPORTANT**: 
+- Use complete relative paths for all script references
+- Validate all Mermaid diagrams before including
+- Create comprehensive, actionable documentation
+- Save checkpoints after each major phase
+- Focus on practical insights that teams can immediately use
 
 ---
 
-*This prompt is designed to work with any LLM interface. Simply copy, paste, and let the AI analyze your entire application ecosystem automatically.*
+*This prompt integrates all specialized analysis capabilities with resilience features for reliable long-running analyses. Copy this entire prompt into any LLM interface for complete project analysis with checkpoint recovery.*
