@@ -8,11 +8,13 @@ This prompt is specifically designed for analyzing DevOps repositories containin
 ### 1. Repository Type Detection
 
 **Identify Repository Characteristics:**
-- **Ansible Repository**: Look for `playbooks/`, `roles/`, `inventory/`, `ansible.cfg`, `requirements.yml`
-- **Jenkins Repository**: Look for `Jenkinsfile`, `jenkins/`, `pipelines/`, `.jenkins/`
-- **Mixed DevOps Repository**: Combination of multiple tools and configurations
-- **Infrastructure Repository**: Terraform, CloudFormation, Kubernetes manifests
-- **CI/CD Repository**: GitHub Actions, GitLab CI, Azure DevOps, CircleCI configurations
+- Ansible Repository: Look for `playbooks/`, `roles/`, `inventory/`, `ansible.cfg`, `requirements.yml`
+- Jenkins Repository: Look for `Jenkinsfile`, `jenkins/`, `pipelines/`, `.jenkins/`
+- Mixed DevOps Repository: Combination of multiple tools and configurations
+- Infrastructure Repository: Terraform, CloudFormation, Kubernetes manifests
+- CI/CD Repository: GitHub Actions, GitLab CI, Azure DevOps, CircleCI configurations
+- Shell Script Repository: Look for `.sh`, `.ps1`, `.bat`, `scripts/`, deployment automation
+- Environment Management: Configuration scripts, setup automation, system initialization
 
 ### 2. Ansible-Specific Analysis
 
@@ -24,6 +26,8 @@ This prompt is specifically designed for analyzing DevOps repositories containin
 - Variable management (group_vars, host_vars)
 - Inventory organization and patterns
 - Task complexity and reusability
+- Shell script integration and execution
+- Environment variable management
 ```
 
 **Best Practices Assessment:**
@@ -50,6 +54,9 @@ This prompt is specifically designed for analyzing DevOps repositories containin
 - Parallel execution strategies
 - Error handling and notifications
 - Artifact management
+- Shell script execution and integration
+- Environment variable propagation
+- File system operations and permissions
 ```
 
 **CI/CD Best Practices:**
@@ -104,7 +111,40 @@ graph TD
 - Monitoring and alerting integration
 - Performance metrics and optimization
 
-### 6. Multi-Tool Integration Assessment
+### 6. Shell Script Analysis
+
+**Script Structure Assessment:**
+```bash
+# Analyze shell script organization
+- Script naming conventions and structure
+- Function definitions and reusability
+- Variable management and scope
+- Error handling and exit codes
+- Documentation and commenting standards
+```
+
+**Best Practices Evaluation:**
+- Input validation and sanitization
+- Error handling and logging
+- Security practices (privilege management, secret handling)
+- Performance optimization (command efficiency, subprocess management)
+- Portability and compatibility (cross-platform considerations)
+
+**Common Issues Detection:**
+- Hardcoded paths and configurations
+- Missing error handling and validation
+- Insecure operations and privilege escalation
+- Inefficient command usage and resource management
+- Inconsistent coding standards and documentation
+
+**Environment Integration:**
+- Environment variable usage and propagation
+- File system operations and permissions
+- Process management and signal handling
+- System dependency management
+- Configuration file interactions
+
+### 7. Multi-Tool Integration Assessment
 
 **Tool Chain Analysis:**
 - Integration points between tools
@@ -112,6 +152,7 @@ graph TD
 - Configuration consistency
 - Shared resource management
 - Cross-tool dependency mapping
+- Shell script integration across tools
 
 **Optimization Opportunities:**
 - Workflow consolidation possibilities
@@ -119,6 +160,7 @@ graph TD
 - Performance bottleneck identification
 - Resource utilization optimization
 - Maintenance overhead reduction
+- Shell script standardization and reuse
 
 ## Advanced Analysis Techniques
 

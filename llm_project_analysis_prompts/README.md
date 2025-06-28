@@ -26,6 +26,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Developer onboarding guide generation
 - Executive summary creation
 - DevOps infrastructure detection
+- Shell script analysis and environment management
 
 **Best For**: Initial project assessment, new team member onboarding, stakeholder presentations
 
@@ -39,6 +40,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Optimization opportunity ranking
 - Cleanup action plan with phases
 - Ansible/Jenkins redundancy patterns
+- Shell script redundancy detection
 
 **Best For**: Code refactoring projects, technical debt reduction, performance optimization
 
@@ -52,6 +54,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Integration point analysis
 - State transition mapping
 - CI/CD pipeline visualization
+- Shell script workflow mapping
 
 **Best For**: System documentation, process optimization, debugging complex workflows
 
@@ -65,6 +68,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Performance analysis and optimization
 - Comprehensive quality metrics
 - DevOps configuration analysis
+- Shell script security and performance analysis
 
 **Best For**: Code reviews, security audits, performance optimization, architectural improvements
 
@@ -78,6 +82,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Implementation testing and success metrics
 - Continuous improvement feedback loops
 - DevOps validation criteria
+- Shell script quality assessment
 
 **Best For**: Ensuring analysis accuracy, validating recommendations, maintaining quality standards
 
@@ -106,6 +111,34 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Jenkins pipeline evaluation
 
 **Best For**: Comprehensive analysis of Ansible, Jenkins, and CI/CD repositories
+
+## 🔧 Shell Script Analysis Capabilities
+
+**Comprehensive Shell Script Support**: All prompts now include dedicated analysis for shell scripts, PowerShell, and batch files.
+
+**Key Features**:
+- **Script Structure Analysis**: Function definitions, variable scope, error handling patterns
+- **Environment Management**: Variable usage, file system operations, configuration handling
+- **Security Assessment**: Command injection risks, privilege escalation, secret exposure
+- **Performance Analysis**: Command optimization, subprocess efficiency, I/O operations
+- **Integration Analysis**: Cross-tool script usage, deployment automation, environment setup
+- **Quality Metrics**: Coding standards, documentation, maintainability assessment
+
+**Supported Script Types**:
+- Bash scripts (.sh)
+- PowerShell scripts (.ps1)
+- Batch files (.bat, .cmd)
+- Shell script libraries and modules
+- Deployment and automation scripts
+- Environment setup and configuration scripts
+
+**Analysis Coverage**:
+- Script organization and architecture
+- Function dependencies and reusability
+- Error handling and logging practices
+- Security vulnerabilities and best practices
+- Performance bottlenecks and optimization opportunities
+- Integration with CI/CD pipelines and DevOps tools
 
 ## 🚀 Quick Start Guide
 

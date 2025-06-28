@@ -34,10 +34,11 @@ This guide provides advanced strategies and insights for enhancing code quality 
 - Design for failure and resilience
 
 **DevOps Integration:**
-- **CI/CD**: Independent pipeline per service
-- **Infrastructure**: Container orchestration, service mesh
-- **Monitoring**: Distributed tracing, centralized logging
-- **Deployment**: Blue-green, canary deployments per service
+- CI/CD: Independent pipeline per service
+- Infrastructure: Container orchestration, service mesh
+- Monitoring: Distributed tracing, centralized logging
+- Deployment: Blue-green, canary deployments per service
+- Shell Scripts: Service-specific deployment scripts, health checks
 
 ### 2. Event-Driven Architecture
 
@@ -55,10 +56,11 @@ This guide provides advanced strategies and insights for enhancing code quality 
 - Implement proper error handling and dead letter queues
 
 **DevOps Considerations:**
-- **Infrastructure**: Message brokers, event streaming platforms
-- **Monitoring**: Event flow tracking, message queue metrics
-- **Deployment**: Rolling updates with event compatibility
-- **Testing**: Event-driven integration testing
+- Infrastructure: Message brokers, event streaming platforms
+- Monitoring: Event flow tracking, message queue metrics
+- Deployment: Rolling updates with event compatibility
+- Testing: Event-driven integration testing
+- Shell Scripts: Event processing scripts, queue management automation
 
 ### 3. Domain-Driven Design (DDD)
 
@@ -76,10 +78,11 @@ This guide provides advanced strategies and insights for enhancing code quality 
 - Establish anti-corruption layers for legacy integration
 
 **DevOps Alignment:**
-- **Team Structure**: Align teams with bounded contexts
-- **Deployment**: Context-specific deployment strategies
-- **Monitoring**: Business domain metrics and KPIs
-- **Infrastructure**: Domain-specific resource allocation
+- Team Structure: Align teams with bounded contexts
+- Deployment: Context-specific deployment strategies
+- Monitoring: Business domain metrics and KPIs
+- Infrastructure: Domain-specific resource allocation
+- Shell Scripts: Domain-specific automation, environment setup
 
 ### 4. CQRS (Command Query Responsibility Segregation)
 
@@ -97,10 +100,11 @@ This guide provides advanced strategies and insights for enhancing code quality 
 - Design proper synchronization mechanisms
 
 **DevOps Implementation:**
-- **Infrastructure**: Separate read/write databases, caching layers
-- **Monitoring**: Command/query performance metrics
-- **Deployment**: Independent scaling of read/write components
-- **Backup**: Event store backup and recovery strategies
+- Infrastructure: Separate read/write databases, caching layers
+- Monitoring: Command/query performance metrics
+- Deployment: Independent scaling of read/write components
+- Backup: Event store backup and recovery strategies
+- Shell Scripts: Database maintenance scripts, performance monitoring automation
 
 ### 5. Modular Architecture Refinement
 

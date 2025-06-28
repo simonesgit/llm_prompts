@@ -22,11 +22,12 @@ You are an expert systems analyst and technical documentation specialist. Your t
 - User interface interaction points
 
 **DevOps Entry Points**
-- **Ansible**: Playbook execution points, role entry tasks
-- **Jenkins**: Pipeline triggers, webhook endpoints, scheduled jobs
-- **CI/CD**: Git hooks, merge triggers, deployment triggers
-- **Infrastructure**: Terraform apply points, CloudFormation stack creation
-- **Monitoring**: Alert triggers, health check endpoints
+- Ansible: Playbook execution points, role entry tasks
+- Jenkins: Pipeline triggers, webhook endpoints, scheduled jobs
+- CI/CD: Git hooks, merge triggers, deployment triggers
+- Infrastructure: Terraform apply points, CloudFormation stack creation
+- Monitoring: Alert triggers, health check endpoints
+- Shell Scripts: Script execution points, cron job triggers, system startup scripts
 
 **Data Entry Points**
 - Database connection and initialization
@@ -46,11 +47,13 @@ You are an expert systems analyst and technical documentation specialist. Your t
 - Notification and communication workflows
 
 **DevOps Process Flows**
-- **CI/CD Pipelines**: Build → Test → Deploy → Monitor workflows
-- **Infrastructure Provisioning**: Plan → Apply → Validate → Monitor
-- **Configuration Management**: Inventory → Playbook → Execution → Verification
-- **Deployment Strategies**: Blue-green, canary, rolling deployments
-- **Incident Response**: Detection → Alert → Response → Resolution
+- CI/CD Pipelines: Build → Test → Deploy → Monitor workflows
+- Infrastructure Provisioning: Plan → Apply → Validate → Monitor
+- Shell Script Workflows: Initialization → Processing → Validation → Cleanup
+- Environment Setup: Variable loading → Service configuration → Health checks
+- Configuration Management: Inventory → Playbook → Execution → Verification
+- Deployment Strategies: Blue-green, canary, rolling deployments
+- Incident Response: Detection → Alert → Response → Resolution
 
 **System Internal Workflows**
 - Service-to-service communication
@@ -58,7 +61,7 @@ You are an expert systems analyst and technical documentation specialist. Your t
 - Cache management processes
 - Background processing workflows
 - Monitoring and logging flows
-- **Automation Flows**: Scheduled tasks, event-driven automation, self-healing processes
+- Automation Flows: Scheduled tasks, event-driven automation, self-healing processes
 
 #### 3. Data Flow Analysis
 
@@ -70,11 +73,12 @@ You are an expert systems analyst and technical documentation specialist. Your t
 - Error handling and rollback procedures
 
 **DevOps Data Flows**
-- **Configuration Data**: Variable propagation, secret management, environment-specific configs
-- **Artifact Flow**: Build artifacts, container images, deployment packages
-- **Monitoring Data**: Metrics collection, log aggregation, alert propagation
-- **State Management**: Infrastructure state, deployment state, configuration drift
-- **Backup and Recovery**: Data backup flows, disaster recovery procedures
+- Configuration Data: Variable propagation, secret management, environment-specific configs
+- Artifact Flow: Build artifacts, container images, deployment packages
+- Monitoring Data: Metrics collection, log aggregation, alert propagation
+- State Management: Infrastructure state, deployment state, configuration drift
+- Backup and Recovery: Data backup flows, disaster recovery procedures
+- Shell Script Data: Environment variable propagation, file system operations, process communication
 
 **State Management Flows**
 - Application state transitions
@@ -82,7 +86,8 @@ You are an expert systems analyst and technical documentation specialist. Your t
 - Transaction state handling
 - Cache invalidation processes
 - Persistence layer interactions
-- **Infrastructure State**: Terraform state, Ansible facts, inventory management
+- Infrastructure State: Terraform state, Ansible facts, inventory management
+- Script State: Variable persistence, temporary file management, execution context
 
 ### VISUALIZATION REQUIREMENTS
 
