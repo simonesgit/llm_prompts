@@ -275,6 +275,14 @@ stateDiagram-v2
 - **Happy Path**: Normal user journey from start to completion
 - **Error Paths**: Exception handling and recovery procedures
 - **Edge Cases**: Unusual scenarios and their handling
+
+## Script Documentation Standards
+For all workflows involving scripts, include:
+- **Script Path**: Relative path from repository root (e.g., `./scripts/deploy.sh`)
+- **Script Purpose**: Brief description of what the script accomplishes
+- **Execution Context**: When and how the script is called
+- **Dependencies**: Other scripts or files this script requires
+- **Integration Points**: How this script connects to other workflow components
 ```
 
 #### 2. Detailed Process Documentation
@@ -286,6 +294,13 @@ For each major workflow:
 ### Purpose
 [Brief description of what this workflow accomplishes]
 
+### Scripts Involved
+| Script Path | Purpose | Execution Context | Dependencies |
+|-------------|---------|-------------------|-------------|
+| `./scripts/[script1].sh` | [Purpose] | [When/how called] | [Required files/scripts] |
+| `./ansible/[playbook].yml` | [Purpose] | [Execution method] | [Inventory/vars files] |
+| `./ci/[script].ps1` | [Purpose] | [Pipeline stage] | [Build artifacts] |
+
 ### Triggers
 - [What initiates this workflow]
 - [Conditions that must be met]
@@ -293,28 +308,46 @@ For each major workflow:
 ### Prerequisites
 - [Required system state]
 - [Dependencies that must be available]
+- [Script permissions and environment setup]
 
 ### Process Steps
-1. **Step 1**: [Detailed description]
+1. **Step 1**: [Detailed description] (`./path/to/script.sh`)
    - Input: [What data/state is required]
    - Processing: [What happens in this step]
    - Output: [What is produced]
    - Error Handling: [How errors are managed]
+   - Script Integration: [How scripts are called/integrated]
 
-2. **Step 2**: [Continue for each step]
+2. **Step 2**: [Continue for each step] (`./path/to/next/script.py`)
+
+### Multi-Script Workflow Diagram
+```mermaid
+flowchart TD
+    Start([Workflow Start])
+    Script1["./scripts/init.sh<br/>Initialization"]
+    Script2["./scripts/process.py<br/>Main Processing"]
+    Script3["./scripts/cleanup.sh<br/>Cleanup"]
+    
+    Start --> Script1
+    Script1 --> Script2
+    Script2 --> Script3
+```
 
 ### Success Criteria
 - [How to determine successful completion]
 - [Expected outcomes]
+- [Script exit codes and validation]
 
 ### Failure Scenarios
 - [Common failure points]
 - [Recovery procedures]
+- [Script error handling and rollback procedures]
 
 ### Performance Considerations
 - [Expected processing time]
 - [Resource requirements]
 - [Scalability factors]
+- [Script execution overhead]
 ```
 
 #### 3. Integration Point Documentation
@@ -387,6 +420,10 @@ For each major workflow:
 - [ ] Performance considerations noted
 - [ ] Security aspects documented
 - [ ] Monitoring and logging points identified
+- [ ] All scripts referenced with complete relative paths from repository root
+- [ ] Script execution context clearly documented
+- [ ] Multi-script workflows include dependency mapping
+- [ ] External script integrations properly documented
 
 #### Clarity Standards
 - **Visual Consistency**: All diagrams follow the same style and notation
@@ -394,6 +431,16 @@ For each major workflow:
 - **Appropriate Detail**: Right level of detail for the target audience
 - **Clear Labeling**: All components and processes clearly labeled
 - **Legend Provided**: Explanation of symbols and conventions used
+- **Script Path Accuracy**: All script paths are verified and relative to repository root
+- **Execution Context**: Clear description of when and how each script is executed
+
+#### Graph Validation Requirements
+**IMPORTANT**: For all Mermaid diagrams, follow the validation guidelines in `08_graph_generation_validation_prompt.md`:
+- ✅ Use alphanumeric characters and underscores only in node names
+- ✅ Avoid special characters like parentheses, hyphens, or spaces in node IDs
+- ✅ Use proper Mermaid syntax for connections and labels
+- ✅ Include script paths in node labels when representing script execution
+- ✅ Validate syntax before finalizing diagrams
 
 ### OUTPUT DELIVERABLES
 

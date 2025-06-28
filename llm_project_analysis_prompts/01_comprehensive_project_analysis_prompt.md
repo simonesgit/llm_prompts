@@ -115,6 +115,9 @@ Create detailed workflow maps including:
 - Process execution flows
 - Error handling workflows
 - Background task sequences
+- **Script Path Documentation**: Include complete relative paths from repository root for all scripts
+- **Multi-Script Workflows**: Document script execution order and dependencies
+- **External Script Integration**: Document third-party script usage and integration points
 
 #### 4. Code Quality Report
 Provide analysis including:
@@ -133,23 +136,32 @@ Create documentation to help new developers:
 
 ### MERMAID DIAGRAM REQUIREMENTS
 
+**IMPORTANT**: Follow validation guidelines in `08_graph_generation_validation_prompt.md` for all diagrams.
+
 Use Mermaid syntax for all diagrams. Include:
 
 1. **System Architecture Diagram**
 ```mermaid
 graph TB
-    A[Frontend] --> B[API Gateway]
-    B --> C[Service Layer]
-    C --> D[Database]
+    Frontend[Frontend Layer] --> APIGateway[API Gateway]
+    APIGateway --> ServiceLayer[Service Layer]
+    ServiceLayer --> Database[(Database)]
 ```
 
-2. **Workflow Diagrams**
+2. **Workflow Diagrams with Script Paths**
 ```mermaid
 flowchart TD
-    Start --> Process1
-    Process1 --> Decision{Condition?}
-    Decision -->|Yes| Process2
-    Decision -->|No| Process3
+    Start([Start Process])
+    InitScript["./scripts/init.sh<br/>Initialize Environment"]
+    ProcessScript["./src/process.py<br/>Main Processing"]
+    Decision{Validation OK?}
+    CleanupScript["./scripts/cleanup.sh<br/>Cleanup Resources"]
+    
+    Start --> InitScript
+    InitScript --> ProcessScript
+    ProcessScript --> Decision
+    Decision -->|Yes| CleanupScript
+    Decision -->|No| ErrorHandler["./scripts/error_handler.sh"]
 ```
 
 3. **Sequence Diagrams**
@@ -158,10 +170,21 @@ sequenceDiagram
     participant User
     participant Frontend
     participant Backend
+    participant ScriptRunner as "Script Runner"
+    
     User->>Frontend: Action
     Frontend->>Backend: API Call
+    Backend->>ScriptRunner: Execute ./scripts/process.sh
+    ScriptRunner-->>Backend: Script Result
     Backend-->>Frontend: Response
 ```
+
+4. **Multi-Script Workflow Documentation**
+For workflows involving multiple scripts, include:
+- Complete script paths relative to repository root
+- Script execution order and dependencies
+- Error handling and rollback scripts
+- Environment setup and cleanup scripts
 
 ### ANALYSIS METHODOLOGY
 
@@ -178,6 +201,10 @@ sequenceDiagram
 - **Actionability**: Provide specific, implementable recommendations
 - **Visual Appeal**: Include comprehensive diagrams and flowcharts
 - **Maintainability**: Create documentation that can be easily updated
+- **Script Documentation**: All scripts referenced with complete relative paths from repository root
+- **Graph Validation**: All Mermaid diagrams follow syntax validation guidelines (see `08_graph_generation_validation_prompt.md`)
+- **Multi-Script Workflows**: Complex workflows clearly show script execution order and dependencies
+- **Path Accuracy**: All script paths verified and consistently formatted
 
 Analyze the provided GitHub repository following this framework and generate comprehensive documentation that will serve as a foundation for the team's "learn, clean, clear, refine, then enhance" pathway.
 ```

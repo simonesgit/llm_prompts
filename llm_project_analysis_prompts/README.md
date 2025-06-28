@@ -27,6 +27,8 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Executive summary creation
 - DevOps infrastructure detection
 - Shell script analysis and environment management
+- **Enhanced Script Path Documentation**: Complete relative paths from repository root
+- **Multi-Script Workflow Mapping**: Script execution order and dependencies
 
 **Best For**: Initial project assessment, new team member onboarding, stakeholder presentations
 
@@ -54,7 +56,10 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Integration point analysis
 - State transition mapping
 - CI/CD pipeline visualization
+- **Enhanced Script Path Documentation**: Complete script paths with execution context
+- **Multi-Script Workflow Diagrams**: Visual representation of script dependencies
 - Shell script workflow mapping
+- **Graph Validation Integration**: References validation guidelines for diagram syntax
 
 **Best For**: System documentation, process optimization, debugging complex workflows
 
@@ -112,6 +117,20 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 
 **Best For**: Comprehensive analysis of Ansible, Jenkins, and CI/CD repositories
 
+### 8. [Graph Generation Validation](./08_graph_generation_validation_prompt.md)
+**Primary Use**: Supportive prompt for generating valid markdown graphs with comprehensive validation
+
+**Key Features**:
+- **Mermaid Syntax Validation**: Comprehensive checks for proper node naming and connections
+- **Positive/Negative Validation Checks**: Prevent common syntax errors and reserved character issues
+- **Script Path Documentation Standards**: Guidelines for including script paths in diagrams
+- **Multi-Script Workflow Visualization**: Best practices for complex workflow diagrams
+- **Error Prevention**: Common pitfalls and how to avoid them
+- **Diagram Type-Specific Validation**: Flowcharts, sequence diagrams, and graph diagrams
+- **Team Collaboration Standards**: Consistent naming and styling conventions
+
+**Best For**: Ensuring diagram syntax accuracy, preventing rendering errors, standardizing visual documentation
+
 ## 🔧 Shell Script Analysis Capabilities
 
 **Comprehensive Shell Script Support**: All prompts now include dedicated analysis for shell scripts, PowerShell, and batch files.
@@ -123,6 +142,9 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - **Performance Analysis**: Command optimization, subprocess efficiency, I/O operations
 - **Integration Analysis**: Cross-tool script usage, deployment automation, environment setup
 - **Quality Metrics**: Coding standards, documentation, maintainability assessment
+- **Enhanced Path Documentation**: Complete relative paths from repository root for all scripts
+- **Multi-Script Workflow Mapping**: Visual representation of script execution order and dependencies
+- **Execution Context Documentation**: When, how, and why scripts are executed
 
 **Supported Script Types**:
 - Bash scripts (.sh)
@@ -157,7 +179,9 @@ flowchart TD
     D --> G
     E --> H[05: Validation Framework]
     F --> H
+    F --> GraphVal[08: Graph Generation Validation]
     G --> H
+    GraphVal --> H
     H --> I[06: Enhancement Strategies]
     I --> J[Implementation]
     J --> K[Continuous Improvement]
@@ -169,6 +193,7 @@ flowchart TD
     style I fill:#f3e5f5
     style J fill:#e8f5e8
     style K fill:#fff8e1
+    style GraphVal fill:#e1f5fe
 ```
 
 ### Step 2: Prepare Your Repository
@@ -306,6 +331,15 @@ Add to prompts:
 - Enterprise architecture patterns
 ```
 
+**Shell Scripts**:
+```markdown
+Add to prompts:
+- Complete path documentation from repository root
+- Execution context and dependency mapping
+- Multi-script workflow visualization
+- Security and performance analysis
+```
+
 ### Domain-Specific Considerations
 
 **Web Applications**:
@@ -325,6 +359,12 @@ Add to prompts:
 - Analyze inter-service communication
 - Review deployment and orchestration
 - Assess monitoring and observability
+
+**DevOps/Infrastructure**:
+- Focus on automation and monitoring
+- Use graph validation guidelines for complex workflows
+- Document script paths and execution contexts
+- Emphasize multi-script workflow mapping
 
 ## 📈 Success Metrics
 
