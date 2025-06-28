@@ -25,6 +25,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Architecture mapping with Mermaid diagrams
 - Developer onboarding guide generation
 - Executive summary creation
+- DevOps infrastructure detection
 
 **Best For**: Initial project assessment, new team member onboarding, stakeholder presentations
 
@@ -37,6 +38,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Unnecessary file identification
 - Optimization opportunity ranking
 - Cleanup action plan with phases
+- Ansible/Jenkins redundancy patterns
 
 **Best For**: Code refactoring projects, technical debt reduction, performance optimization
 
@@ -49,6 +51,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Process flow documentation
 - Integration point analysis
 - State transition mapping
+- CI/CD pipeline visualization
 
 **Best For**: System documentation, process optimization, debugging complex workflows
 
@@ -61,6 +64,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Security vulnerability assessment
 - Performance analysis and optimization
 - Comprehensive quality metrics
+- DevOps configuration analysis
 
 **Best For**: Code reviews, security audits, performance optimization, architectural improvements
 
@@ -73,6 +77,7 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Expert review processes and checklists
 - Implementation testing and success metrics
 - Continuous improvement feedback loops
+- DevOps validation criteria
 
 **Best For**: Ensuring analysis accuracy, validating recommendations, maintaining quality standards
 
@@ -85,12 +90,75 @@ Support development teams in the **"Learn, Clean, Clear, Refine, then Enhance"**
 - Performance optimization strategies
 - Security-by-design principles
 - Continuous improvement frameworks
+- DevOps integration strategies
 
 **Best For**: Long-term codebase evolution, team capability building, sustainable development practices
+
+### 7. [DevOps CI/CD Analysis](./07_devops_cicd_analysis_prompt.md)
+**Primary Use**: Specialized DevOps and CI/CD analysis
+
+**Key Features**:
+- Infrastructure-as-Code analysis
+- Pipeline optimization
+- Automation assessment
+- Multi-tool integration
+- Ansible playbook analysis
+- Jenkins pipeline evaluation
+
+**Best For**: Comprehensive analysis of Ansible, Jenkins, and CI/CD repositories
 
 ## 🚀 Quick Start Guide
 
 ### Step 1: Choose Your Analysis Type
+
+```mermaid
+flowchart TD
+    A[Repository Input] --> B{Repository Type}
+    B -->|Standard Code| C[01: Comprehensive Analysis]
+    B -->|DevOps/CI-CD| D[07: DevOps CI/CD Analysis]
+    C --> E[02: Redundancy Detection]
+    C --> F[03: Workflow Mapping]
+    C --> G[04: Advanced Code Analysis]
+    D --> E
+    D --> F
+    D --> G
+    E --> H[05: Validation Framework]
+    F --> H
+    G --> H
+    H --> I[06: Enhancement Strategies]
+    I --> J[Implementation]
+    J --> K[Continuous Improvement]
+    
+    style A fill:#e1f5fe
+    style B fill:#ffecb3
+    style D fill:#e8f5e8
+    style H fill:#fff3e0
+    style I fill:#f3e5f5
+    style J fill:#e8f5e8
+    style K fill:#fff8e1
+```
+
+### Step 2: Prepare Your Repository
+
+1. **Ensure Complete Access**: Make sure you have full repository access
+2. **Gather Context**: Collect any existing documentation or architectural notes
+3. **Identify Repository Type**: Determine if it's a standard application, DevOps-focused, or mixed repository
+4. **DevOps Considerations**: For Ansible/Jenkins repos, gather environment details and deployment contexts
+5. **Identify Stakeholders**: Know who will use the generated documentation
+6. **Set Scope**: Determine which parts of the codebase to analyze first
+
+### Step 3: Execute the Analysis
+
+1. **Select the appropriate prompt** based on repository type:
+   - Standard applications: Start with Comprehensive Analysis
+   - DevOps/CI-CD repositories: Start with DevOps CI/CD Analysis
+   - Mixed repositories: Use both approaches
+2. **Customize for your project** (language-specific considerations, focus areas, DevOps tools)
+3. **Provide repository context** to your LLM, including infrastructure and deployment details
+4. **Run the analysis** in phases for large projects
+5. **Apply validation framework** to ensure quality and accuracy
+6. **Review and validate** results with domain experts and DevOps teams
+7. **Implement recommendations** incrementally with continuous monitoring
 
 ```mermaid
 flowchart TD
@@ -99,12 +167,14 @@ flowchart TD
     Question -->|Find code issues| Redundancy[Use Redundancy Detection]
     Question -->|Document workflows| Workflow[Use Workflow Mapping]
     Question -->|Deep technical review| Advanced[Use Advanced Analysis]
+    Question -->|DevOps/CI-CD focus| DevOps[Use DevOps CI/CD Analysis]
     Question -->|Verify analysis quality| Validation[Use Validation Framework]
     
     Comprehensive --> Implement[Implement Prompt]
     Redundancy --> Implement
     Workflow --> Implement
     Advanced --> Implement
+    DevOps --> Implement
     Validation --> Implement
     
     Implement --> Review[Review Results]

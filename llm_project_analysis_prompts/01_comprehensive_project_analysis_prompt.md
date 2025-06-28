@@ -33,6 +33,9 @@ You are an expert software architect and code analyst. Your task is to perform a
    - Database systems and data storage
    - External APIs and services
    - Development and deployment tools
+   - **DevOps and Infrastructure**: Ansible playbooks, Jenkins pipelines, CI/CD tools
+   - **Infrastructure-as-Code**: Terraform, CloudFormation, Kubernetes manifests
+   - **Containerization**: Docker, Podman, container orchestration
 
 #### Phase 2: Architecture Analysis
 1. **System Architecture**
@@ -40,6 +43,10 @@ You are an expert software architect and code analyst. Your task is to perform a
    - Map major components and their responsibilities
    - Document data flow between components
    - Identify external dependencies and integrations
+   - **Infrastructure Architecture**: Multi-tier, cloud-native, hybrid patterns
+   - **Automation Patterns**: Pipeline-as-code, infrastructure-as-code
+   - **DevOps Structure**: Playbook organization, role hierarchies, pipeline stages
+   - **Environment Management**: Dev/staging/prod configurations, variable management
 
 2. **Module Dependency Mapping**
    - Create dependency graphs for major modules

@@ -21,12 +21,20 @@ You are an expert systems analyst and technical documentation specialist. Your t
 - Event-driven process triggers
 - User interface interaction points
 
+**DevOps Entry Points**
+- **Ansible**: Playbook execution points, role entry tasks
+- **Jenkins**: Pipeline triggers, webhook endpoints, scheduled jobs
+- **CI/CD**: Git hooks, merge triggers, deployment triggers
+- **Infrastructure**: Terraform apply points, CloudFormation stack creation
+- **Monitoring**: Alert triggers, health check endpoints
+
 **Data Entry Points**
 - Database connection and initialization
 - File system interactions
 - External API integrations
 - Message queue consumers
 - Configuration loading processes
+- **DevOps Interactions**: Manual deployments, infrastructure changes, pipeline approvals
 
 #### 2. Process Flow Mapping
 
@@ -37,12 +45,20 @@ You are an expert systems analyst and technical documentation specialist. Your t
 - Data validation and processing flows
 - Notification and communication workflows
 
+**DevOps Process Flows**
+- **CI/CD Pipelines**: Build → Test → Deploy → Monitor workflows
+- **Infrastructure Provisioning**: Plan → Apply → Validate → Monitor
+- **Configuration Management**: Inventory → Playbook → Execution → Verification
+- **Deployment Strategies**: Blue-green, canary, rolling deployments
+- **Incident Response**: Detection → Alert → Response → Resolution
+
 **System Internal Workflows**
 - Service-to-service communication
 - Database transaction flows
 - Cache management processes
 - Background processing workflows
 - Monitoring and logging flows
+- **Automation Flows**: Scheduled tasks, event-driven automation, self-healing processes
 
 #### 3. Data Flow Analysis
 
@@ -53,12 +69,20 @@ You are an expert systems analyst and technical documentation specialist. Your t
 - Output formatting and delivery
 - Error handling and rollback procedures
 
+**DevOps Data Flows**
+- **Configuration Data**: Variable propagation, secret management, environment-specific configs
+- **Artifact Flow**: Build artifacts, container images, deployment packages
+- **Monitoring Data**: Metrics collection, log aggregation, alert propagation
+- **State Management**: Infrastructure state, deployment state, configuration drift
+- **Backup and Recovery**: Data backup flows, disaster recovery procedures
+
 **State Management Flows**
 - Application state transitions
 - Session management workflows
 - Transaction state handling
 - Cache invalidation processes
 - Persistence layer interactions
+- **Infrastructure State**: Terraform state, Ansible facts, inventory management
 
 ### VISUALIZATION REQUIREMENTS
 
