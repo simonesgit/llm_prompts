@@ -13,6 +13,10 @@ The Model Context Protocol (MCP) allows VS Code to connect to external servers t
 
 ## Configuration Methods
 
+### Current Limitation: Headers Property Not Supported
+
+**Important Note**: As of VS Code 1.99.2, there is a known issue where the `headers` property is incorrectly flagged as invalid for SSE MCP servers, even though it should be supported according to the MCP specification.
+
 ### 1. Using VS Code Settings (Recommended)
 
 Configure in `settings.json`:
@@ -31,18 +35,26 @@ Configure in `settings.json`:
 }
 ```
 
-### 2. Alternative: Using `.vscode/mcp.json`
+### 2. Alternative: Using `.vscode/mcp.json` (Current Working Configuration)
 
 Create a `.vscode/mcp.json` file in your workspace:
 
 ```json
 {
-  "mcpServers": {
+  "inputs": [
+    {
+      "id": "github-token",
+      "type": "promptString",
+      "description": "GitHub Personal Access Token",
+      "password": true
+    }
+  ],
+  "servers": {
     "github-server": {
       "type": "sse",
-      "url": "http://localhost:8080/sse",
+      "url": "http://localhost:3000/sse",
       "env": {
-        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}"
+        "GITHUB_TOKEN": "${input:github-token}"
       }
     }
   }
@@ -448,9 +460,19 @@ class GitHubMCPServer:
         }
 ```
 
-#### Option 2: HTTP Headers Authentication
+**Setup**: Set the environment variable before starting VS Code:
+```bash
+export GITHUB_TOKEN="your_token_here"
+code .
+```
 
-Pass tokens via HTTP headers in SSE requests:
+#### Option 2: VS Code Input Variables (Secure Prompting)
+
+Use the `${input:github-token}` configuration as shown above. VS Code will securely prompt for the token when needed.
+
+#### Option 3: HTTP Headers Authentication (Limited Support)
+
+**Note**: Due to the current VS Code limitation where `headers` property is flagged as invalid for SSE MCP servers, this approach has limited support:
 
 ```json
 {
@@ -486,7 +508,7 @@ async def sse_handler(request):
     # ... rest of SSE handling
 ```
 
-#### Option 3: Custom Authentication Tool
+#### Option 4: Custom Authentication Tool
 
 Implement a custom authentication tool that VS Code calls first:
 
@@ -576,14 +598,48 @@ For different operations, your GitHub Personal Access Token needs specific scope
 - **User information**: `user:read`
 - **Organization access**: `read:org`
 
+## Current Status and Future Expectations
+
+### Known Issues
+
+1. **Headers Property Not Supported**: VS Code 1.99.2 incorrectly flags the `headers` property as invalid for SSE MCP servers
+2. **Environment Variables Not Passed**: The MCP `initialize` request does not include environment variables
+
+### Expected Resolution
+
+The VS Code team has acknowledged the headers issue and it's expected to be resolved in future releases. Once fixed, the recommended configuration will be:
+
+```json
+{
+  "servers": {
+    "github-server": {
+      "type": "sse",
+      "url": "http://localhost:3000/sse",
+      "headers": {
+        "Authorization": "Bearer ${input:github-token}"
+      }
+    }
+  }
+}
+```
+
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Token not found**: Ensure environment variable is set and VS Code can access it
-2. **SSE connection fails**: Check server is running and endpoint is correct
-3. **GitHub API errors**: Verify token has required scopes
-4. **CORS issues**: Ensure server includes proper CORS headers
+1. **"Property headers is not allowed" error**: This is a known VS Code issue. Remove the `headers` property and use alternative authentication methods
+2. **Token not found**: Ensure environment variable is set and VS Code can access it
+3. **SSE connection fails**: Check server is running and endpoint is correct
+4. **GitHub API errors**: Verify token has required scopes
+5. **CORS issues**: Ensure server includes proper CORS headers
+
+### Debug Tips
+
+- Use VS Code Developer Tools to inspect network requests
+- Add logging to your MCP server implementation
+- Test server independently before integrating with VS Code
+- Verify environment variables are properly set
+- Check VS Code version compatibility (MCP support requires VS Code 1.99+)
 
 ### Debug Configuration
 
