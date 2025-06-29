@@ -13,38 +13,34 @@ The Model Context Protocol (MCP) allows VS Code to connect to external servers t
 
 ## Configuration Methods
 
-### 1. Using `.vscode/mcp.json` (Recommended)
+### 1. Using VS Code Settings (Recommended)
 
-Create a `.vscode/mcp.json` file in your workspace:
+Configure in `settings.json`:
 
 ```json
 {
-  "servers": {
-    "github-mcp-server": {
-      "command": "python",
-      "args": ["/path/to/your/mcp_server.py"],
-      "transport": "sse",
-      "endpoint": "http://localhost:8080/sse",
+  "mcpServers": {
+    "github-server": {
+      "type": "sse",
+      "url": "https://your-mcp-server.com/sse",
       "env": {
-        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}"
+        "GITHUB_TOKEN": "${input:githubToken}"
       }
     }
   }
 }
 ```
 
-### 2. Using VS Code Settings
+### 2. Alternative: Using `.vscode/mcp.json`
 
-Alternatively, configure in `settings.json`:
+Create a `.vscode/mcp.json` file in your workspace:
 
 ```json
 {
-  "mcp.servers": {
-    "github-mcp-server": {
-      "command": "python",
-      "args": ["/path/to/your/mcp_server.py"],
-      "transport": "sse",
-      "endpoint": "http://localhost:8080/sse",
+  "mcpServers": {
+    "github-server": {
+      "type": "sse",
+      "url": "http://localhost:8080/sse",
       "env": {
         "GITHUB_TOKEN": "${env:GITHUB_TOKEN}"
       }
@@ -82,8 +78,14 @@ Alternatively, configure in `settings.json`:
 **Configuration:**
 ```json
 {
-  "env": {
-    "GITHUB_TOKEN": "${input:githubToken}"
+  "mcpServers": {
+    "github-server": {
+      "type": "sse",
+      "url": "https://your-mcp-server.com/sse",
+      "env": {
+        "GITHUB_TOKEN": "${input:githubToken}"
+      }
+    }
   },
   "inputs": [
     {
@@ -100,11 +102,15 @@ Alternatively, configure in `settings.json`:
 **Configuration:**
 ```json
 {
-  "transport": "sse",
-  "endpoint": "http://localhost:8080/sse",
-  "headers": {
-    "Authorization": "Bearer ${env:GITHUB_TOKEN}",
-    "X-API-Key": "${env:API_KEY}"
+  "mcpServers": {
+    "github-server": {
+      "type": "sse",
+      "url": "http://localhost:8080/sse",
+      "headers": {
+        "Authorization": "Bearer ${env:GITHUB_TOKEN}",
+        "X-API-Key": "${env:API_KEY}"
+      }
+    }
   }
 }
 ```
@@ -260,6 +266,14 @@ class GitHubMCPServer:
 # SSE endpoint handler
 async def sse_handler(request):
     """Handle SSE connections from VS Code"""
+    # Extract GitHub token from headers
+    auth_header = request.headers.get('Authorization', '')
+    github_token = request.headers.get('X-GitHub-Token')
+    
+    # Try Bearer token format first
+    if auth_header.startswith('Bearer '):
+        github_token = auth_header[7:]  # Remove 'Bearer ' prefix
+    
     response = web.StreamResponse(
         status=200,
         reason='OK',
@@ -268,13 +282,16 @@ async def sse_handler(request):
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive',
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+            'Access-Control-Allow-Headers': 'Authorization, Content-Type, X-GitHub-Token',
         }
     )
     
     await response.prepare(request)
     
+    # Initialize server with token from headers or environment
     server = GitHubMCPServer()
+    if github_token:
+        server.github_token = github_token
     
     try:
         async for line in request.stream():
@@ -359,12 +376,135 @@ class GitHubMCPServer:
 
 ## Token Flow Timeline
 
-1. **VS Code Startup**: VS Code loads MCP configuration from `.vscode/mcp.json` or `settings.json`
-2. **Environment Resolution**: VS Code resolves `${env:GITHUB_TOKEN}` from environment variables
-3. **Server Connection**: VS Code initiates SSE connection to the MCP server endpoint
-4. **Initialize Request**: VS Code sends MCP `initialize` request with resolved environment variables
-5. **Token Processing**: MCP server receives and stores the GitHub token for API calls
-6. **Tool Execution**: When tools are called, the server uses the stored token for GitHub API requests
+### Corrected Token Flow (Based on Actual Testing)
+
+1. **VS Code Startup**: VS Code loads your `settings.json` or `.vscode/mcp.json`
+2. **Configuration Loading**: VS Code sees the MCP server configuration
+3. **Environment Variable Resolution**: VS Code resolves variables like `${input:githubToken}` or `${env:GITHUB_TOKEN}`
+4. **MCP Server Connection**: VS Code establishes SSE connection to your server
+5. **HTTP Headers**: If configured, VS Code sends resolved tokens in HTTP headers:
+   ```http
+   GET /sse HTTP/1.1
+   Authorization: Bearer ghp_actual_resolved_token_value
+   X-GitHub-Token: ghp_actual_resolved_token_value
+   ```
+6. **Initialize Request**: VS Code sends `initialize` JSON-RPC request (WITHOUT environment variables):
+   ```json
+   {
+     "method": "initialize",
+     "params": {
+       "protocolVersion": "2024-11-05",
+       "capabilities": {...},
+       "clientInfo": {...}
+       // NO environment field
+     }
+   }
+   ```
+7. **Server Processing**: Your MCP server extracts token from headers or environment variables
+8. **Tool Execution**: When tools are called, server uses the stored token for GitHub API requests
+
+## Environment Variable Handling
+
+**Important Update**: Based on actual testing, environment variables configured in VS Code are **NOT automatically sent** in the MCP `initialize` request. The `initialize` request only contains `protocolVersion`, `capabilities`, and `clientInfo`.
+
+### Actual Initialize Request Format:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {...},
+    "clientInfo": {...}
+    // NO environment field here
+  }
+}
+```
+
+### Alternative Approaches for Token Access:
+
+#### Option 1: Direct Environment Access (Recommended)
+
+The most reliable approach is to access environment variables directly in your server:
+
+```python
+import os
+
+class GitHubMCPServer:
+    def __init__(self):
+        # Direct access to environment variables
+        self.github_token = os.getenv('GITHUB_TOKEN')
+        if not self.github_token:
+            raise ValueError("GITHUB_TOKEN environment variable not set")
+    
+    async def initialize(self, params):
+        # Token is already available from environment
+        return {
+            "protocolVersion": "2024-11-05",
+            "capabilities": {"tools": {"listChanged": True}},
+            "serverInfo": {"name": "github-mcp-server", "version": "1.0.0"}
+        }
+```
+
+#### Option 2: HTTP Headers Authentication
+
+Pass tokens via HTTP headers in SSE requests:
+
+```json
+{
+  "mcpServers": {
+    "github-server": {
+      "type": "sse",
+      "url": "https://your-mcp-server.com/sse",
+      "headers": {
+        "Authorization": "Bearer ${input:githubToken}",
+        "X-GitHub-Token": "${env:GITHUB_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+Then extract from request headers:
+
+```python
+async def sse_handler(request):
+    # Extract token from headers
+    auth_header = request.headers.get('Authorization', '')
+    github_token = request.headers.get('X-GitHub-Token')
+    
+    if auth_header.startswith('Bearer '):
+        github_token = auth_header[7:]  # Remove 'Bearer ' prefix
+    
+    if not github_token:
+        return web.Response(status=401, text="GitHub token required")
+    
+    # Store token for use in MCP server instance
+    server = GitHubMCPServer(github_token)
+    # ... rest of SSE handling
+```
+
+#### Option 3: Custom Authentication Tool
+
+Implement a custom authentication tool that VS Code calls first:
+
+```python
+async def authenticate(self, params):
+    """Custom authentication tool"""
+    token = params.get("token")
+    if not token:
+        return {"error": "Token required"}
+    
+    self.github_token = token
+    
+    # Validate token
+    if await self._validate_github_token(token):
+        return {"content": [{"type": "text", "text": "Authentication successful"}]}
+    else:
+        return {"error": "Invalid GitHub token"}
+```
 
 ## Security Best Practices
 
