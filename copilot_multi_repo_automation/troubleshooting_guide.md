@@ -49,6 +49,89 @@ This guide helps you diagnose and resolve common issues when implementing GitHub
    - Ensure access to all repositories in the workspace
    - Verify organization permissions if using enterprise account
 
+### Iteration and Workflow Issues
+
+#### Issue: Copilot Stops Mid-Task
+
+**Symptoms:**
+- Documentation generation stops unexpectedly
+- Incomplete files or sections
+- Lost context between iterations
+
+**Solutions:**
+
+1. **Use Checkpoint-Based Prompts**
+   ```
+   @workspace Resume documentation for [repo_name] from last checkpoint
+   ```
+
+2. **Break Down Large Tasks**
+   ```
+   # Instead of:
+   @workspace Document all repositories
+   
+   # Use:
+   @workspace Document only [specific_repo] completely
+   ```
+
+3. **Maintain Context**
+   ```
+   @workspace Continuing multi-repo documentation. 
+   Previously completed: [list]. 
+   Currently working on: [current_repo]
+   ```
+
+#### Issue: Inconsistent Documentation Quality
+
+**Symptoms:**
+- Some repositories have detailed docs, others are basic
+- Different formatting styles across repositories
+- Missing sections in some documentation
+
+**Solutions:**
+
+1. **Use Template-Based Approach**
+   ```
+   @workspace Use the same documentation structure as [reference_repo] for [new_repo]
+   ```
+
+2. **Quality Validation Prompts**
+   ```
+   @workspace Review [repo_name] documentation and ensure it matches quality standards
+   ```
+
+3. **Progressive Enhancement**
+   ```
+   # Round 1: Basic structure for all repos
+   # Round 2: Detailed content for each repo
+   # Round 3: Cross-linking and integration
+   ```
+
+#### Issue: Lost Progress Between Sessions
+
+**Symptoms:**
+- Can't remember what was already documented
+- Duplicate work across sessions
+- Unclear next steps
+
+**Solutions:**
+
+1. **Create Progress Tracking**
+   ```
+   @workspace Create a documentation_progress.md file tracking completion status
+   ```
+
+2. **Use Session State Files**
+   ```
+   @workspace Update session state with current progress before ending
+   ```
+
+3. **Checkpoint Markers**
+   ```markdown
+   <!-- CHECKPOINT: Basic structure completed -->
+   <!-- CHECKPOINT: Content added -->
+   ```
+
 #### Issue 2: Limited Context or Incomplete Analysis
 
 **Symptoms:**

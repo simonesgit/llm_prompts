@@ -134,6 +134,53 @@ Focus on maintaining accuracy between code and documentation.
 Ensure documentation reflects the current state of all repositories.
 ```
 
+## 🤖 Working with Copilot's Iterative Nature
+
+### Understanding Copilot Limitations
+GitHub Copilot typically works in small iterations and may not complete large tasks in one go. Our solution addresses this with:
+
+#### 1. **Checkpoint-Based Workflows**
+```
+# Phase 1: Discovery
+@workspace Analyze workspace structure and create repository inventory
+
+# Phase 2: Individual Documentation (per repo)
+@workspace Focus on [repo_name] only - create comprehensive documentation
+
+# Phase 3: Cross-Reference Building
+@workspace Update all documentation with cross-repository links
+
+# Phase 4: Main Summary
+@workspace Create main project.md summarizing all repositories
+```
+
+#### 2. **Resumable Task Patterns**
+```
+# If Copilot stops mid-task:
+@workspace Continue documentation generation from where we left off for [specific_repo]
+
+# Progress tracking:
+@workspace Show current documentation completion status across all repositories
+
+# Recovery prompts:
+@workspace Resume multi-file editing session for documentation updates
+```
+
+#### 3. **Incremental Enhancement Strategy**
+```
+# Round 1: Basic structure
+@workspace Create basic README.md files for all repositories
+
+# Round 2: Content enhancement
+@workspace Enhance existing documentation with detailed sections
+
+# Round 3: Cross-linking
+@workspace Add cross-repository references and integration details
+
+# Round 4: Validation
+@workspace Review and improve documentation quality
+```
+
 ## 🎛️ Advanced Automation Techniques
 
 ### Multi-File Edit Optimization

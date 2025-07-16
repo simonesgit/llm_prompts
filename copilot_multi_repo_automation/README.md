@@ -61,6 +61,8 @@ workspace_root/
 - **[Setup Guide](./setup_guide.md)** - Step-by-step configuration instructions
 - **[Custom Instructions Template](./custom_instructions.md)** - Template for `.github/copilot-instructions.md`
 - **[Automation Prompts](./automation_prompts.md)** - Ready-to-use prompts for documentation generation
+- **[Copilot Iteration Strategies](./copilot_iteration_strategies.md)** - Working with Copilot's iterative nature
+- **[Quality Evaluation Reference](./quality_evaluation_reference.md)** - Assessment framework and continuous improvement
 
 ### Advanced Guides
 - **[Workflow Automation](./workflow_automation.md)** - Advanced automation techniques and strategies

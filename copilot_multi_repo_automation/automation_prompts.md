@@ -289,6 +289,51 @@ Ensure the documentation is easily discoverable and navigable.
 
 ---
 
+## 🔄 Copilot Iteration-Friendly Prompts
+
+### Checkpoint-Based Task Management
+```
+# Start with discovery phase
+@workspace Phase 1: Scan workspace and list all repositories with brief descriptions
+
+# Focus on one repository at a time
+@workspace Phase 2: Focus ONLY on [repo_name] - create complete documentation including:
+- README.md with overview, setup, usage
+- API documentation if applicable
+- Architecture notes
+- Dependencies and integrations
+
+# Build connections incrementally
+@workspace Phase 3: Add cross-repository links to [repo_name] documentation
+
+# Create summary when all repos are done
+@workspace Phase 4: Create main project.md summarizing all documented repositories
+```
+
+### Progress Tracking Prompts
+```
+# Check current status
+@workspace Show documentation completion status for each repository in workspace
+
+# Resume interrupted work
+@workspace Continue documentation work from last checkpoint for [repo_name]
+
+# Validate progress
+@workspace Review documentation quality and identify gaps across all repositories
+```
+
+### Recovery and Continuation Prompts
+```
+# When Copilot stops mid-task
+@workspace Resume the documentation generation task that was interrupted
+
+# When switching contexts
+@workspace Save current documentation progress and switch to [next_repo]
+
+# When returning to work
+@workspace Load previous documentation session and continue where left off
+```
+
 ## 🎯 Specialized Prompts
 
 ### For Large Workspaces (10+ Repositories)
